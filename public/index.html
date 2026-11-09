@@ -9,24 +9,24 @@
     <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 
-<body onload="showTableOnLoad()">
+<body>
     <header class="header">
         <img class="header_logo" src="img/logo.png">
         <h1 id="title"> </h1>
-        <button class="MenuButton" onclick="showCreateWorkerDialog()"><img src="img/add_worker.png"></button>
+        <button class="MenuButton" id="addWorkerBtn"><img src="img/add_worker.png"></button>
     </header>
     <div class="icon-header">
         <h1 class="HeaderIconÜbersicht">Inventar</h1>
         <div class="ImpExpButtons">
-            <button onclick="objectCreationMethodSelectionDialog()">
+            <button id="createObjectBtn">
                 Objekt anlegen
                 <img src="img/plus.png" />
             </button>
-            <button id="borrowBtn" onclick="borrowScanDialog()">
+            <button id="borrowBtn">
                 Ausleihe
                 <img src="img/borrow.png" />
             </button>
-            <button id="returnBtn" onclick="returnScanDialog()">
+            <button id="returnBtn">
                 Rückgabe
                 <img src="img/returnicon.png" />
             </button>
@@ -42,7 +42,7 @@
         <option value="ausgeliehen">Ausgeliehene Werkzeuge</option>
         <option value="ausgeliehen_historie">Ausleih Historie</option>
     </select>
-    <button id="loadButton" onclick="showTable()">Daten laden</button>
+    <button id="loadButton">Daten laden</button>
     <div class="table-container">
         <table id="objektTabelle">
             <thead>
@@ -54,7 +54,7 @@
     <br>
     <p id="WaitingMessage"></p>
     <div class="image-toggle-container">
-        <button id="toggleImagesBtn" onclick="toggleImages()">Certifikate anzeigen</button>
+        <button id="toggleImagesBtn">Certifikate anzeigen</button>
     </div>
     
     <div id="imageGallery" class="hidden-gallery">
@@ -290,7 +290,7 @@
     </dialog>
 
 
-    <script src="js/scripts.js"></script>
+    <script type="module" src="js/main.js"></script>
     <div id="toast" class="toast-notification">Erfolgreich!</div>
 </body>
     
