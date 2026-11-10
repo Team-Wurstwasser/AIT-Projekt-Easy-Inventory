@@ -5,30 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Easy Inventory</title>
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="icon" type="image/png" href="pics/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 
-<body onload="showTableOnLoad()">
+<body>
     <header class="header">
-        <img class="header_logo" src="pics/logo_big.png">
+        <img class="header_logo" src="img/logo.png" alt="Easy Inventory Logo">
         <h1 id="title"> </h1>
-        <button class="MenuButton" onclick="showCreateWorkerDialog()"><img src="pics/add_worker.png"></button>
+        <button class="MenuButton" id="addWorkerBtn" aria-label="Mitarbeiter hinzufügen"><img src="img/add_worker.png" alt=""></button>
     </header>
     <div class="icon-header">
         <h1 class="HeaderIconÜbersicht">Inventar</h1>
         <div class="ImpExpButtons">
-            <button onclick="objectCreationMethodSelectionDialog()">
+            <button id="createObjectBtn">
                 Objekt anlegen
-                <img src="pics/plus.png" />
+                <img src="img/plus.png" alt="">
             </button>
-            <button id="borrowBtn" onclick="borrowScanDialog()">
+            <button id="borrowBtn">
                 Ausleihe
-                <img src="pics/borrow.png" />
+                <img src="img/borrow.png" alt="">
             </button>
-            <button id="returnBtn" onclick="returnScanDialog()">
+            <button id="returnBtn">
                 Rückgabe
-                <img src="pics/returnicon.png" />
+                <img src="img/returnicon.png" alt="">
             </button>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <option value="ausgeliehen">Ausgeliehene Werkzeuge</option>
         <option value="ausgeliehen_historie">Ausleih Historie</option>
     </select>
-    <button id="loadButton" onclick="showTable()">Daten laden</button>
+    <button id="loadButton">Daten laden</button>
     <div class="table-container">
         <table id="objektTabelle">
             <thead>
@@ -54,24 +54,24 @@
     <br>
     <p id="WaitingMessage"></p>
     <div class="image-toggle-container">
-        <button id="toggleImagesBtn" onclick="toggleImages()">Certifikate anzeigen</button>
+        <button id="toggleImagesBtn">Zertifikate anzeigen</button>
     </div>
     
     <div id="imageGallery" class="hidden-gallery">
-        <img src="pics/certificate.png" alt="Bild 1">
-        <img src="pics/certificate1.png" alt="Bild 2">
-        <img src="pics/certificate2.png" alt="Bild 3">
+        <img src="img/certificate.png" alt="Bild 1">
+        <img src="img/certificate1.png" alt="Bild 2">
+        <img src="img/certificate2.png" alt="Bild 3">
     </div>
     <dialog id="objectCreationMethodSelectionDialog">
-        <h2>Wie möchten Sie ein neues Objekt anlegen ?</h2>
+        <h2>Wie möchten Sie ein neues Objekt anlegen?</h2>
         <button id="scannerMode">Barcode scannen
-            <img src="pics/scanBarcode.png" alt="">
+            <img src="img/scanBarcode.png" alt="">
         </button>
-        <button id="manualMode">Barcode Erstellen
-            <img src="pics/createBarcode.png" alt="">
+        <button id="manualMode">Barcode erstellen
+            <img src="img/createBarcode.png" alt="">
 
         </button>
-        <button class="closeBtn" id="closeBtn"> <img src="pics/close.png" alt="X"></button>
+        <button class="closeBtn" id="closeBtn"> <img src="img/close.png" alt="X"></button>
     </dialog>
 
     <dialog id="objectCreateScanBarcodeDialog">
@@ -85,14 +85,14 @@
         <h2>Bitte folgende Informationen eingeben:</h2>
         Barcode: <input type="text" id="objectID" disabled autocomplete="off"> <br>
         Bezeichnung: <input type="text" id="objectName" placeholder="Objektbezeichnung" autofocus autocomplete="off"> <br>
-        Werkzeugtyp: <select id="objectTypeSelect"></select>  <button id="addObjectTypeBtn" class="btnType"><img src="pics/plus_type.png" alt="X"></button><br><br>
+        Werkzeugtyp: <select id="objectTypeSelect"></select>  <button id="addObjectTypeBtn" class="btnType"><img src="img/plus_type.png" alt="X"></button><br><br>
         Anschaffungsdatum: <input type="date" id="objectPurchaseDate" placeholder="Anschaffungsdatum" autocomplete="off"> <br>
         <button id="objectSubmitBtn">Bestätigen</button>
         <button id="cancelObjectConfigBtn">Abbrechen</button>
     </dialog>
 
     <dialog id="createdObjectOverviewDialog">
-        <h2>Erstelltes Objekt übersicht</h2>
+        <h2>Übersicht des erstellten Objekts</h2>
         <p id="objectOverviewID">ID: </p>
         <p id="objectOverviewName">Name: </p>
         <p id="objectOverviewType">Typ: </p>
@@ -113,8 +113,9 @@
         <h2>Objekt ausleihen</h2>
         <h2>Bitte folgende Informationen eingeben:</h2>
         Barcode: <input type="text" id="borrowBarcode" disabled autocomplete="off"> <br>
-        Ausleihauder in Tage : <input type="number" id="borrowDuration" autocomplete="off"> <br>
-        Mitabeiter : <select id="borrowerIdSelect" autocomplete="off"></select> <br>
+        Ausleihdatum: <input type="date" id="borrowDate" autocomplete="off"> <br>
+        Ausleihdauer in Tagen: <input type="number" id="borrowDuration" autocomplete="off"> <br>
+        Mitarbeiter: <select id="borrowerIdSelect" autocomplete="off"></select> <br>
         <button id="borrowSubmitBtn" disabled>Bestätigen</button>
           <button id="closeBorrowDialogBtn">Abbrechen</button>
      </dialog>
@@ -128,7 +129,7 @@
 
     <dialog id="returnDialog">
         <h2>Objekt zurückgeben</h2>
-        <h2>Bitte folgende Informationen eingeben.</h2>
+        <h2>Bitte folgende Informationen eingeben:</h2>
         Barcode: <input type="text" id="returnBarcode" disabled autocomplete="off"> <br>
         Kondition des Objekts bei Rückgabe: <br> <input type="text" id="returnCondition" placeholder="Zustand des Objekts" autocomplete="off">
         <br>
@@ -139,9 +140,9 @@
     <!-- Verlängern Dialog ################################################### -->
     <dialog id="verlängernDialog">
         <h2>Objekt verlängern</h2>
-        <h2>Bitte folgende Informationen eingeben.</h2>
+        <h2>Bitte folgende Informationen eingeben:</h2>
         Barcode: <input type="text" id="verlängernBarcode" disabled autocomplete="off"> <br>
-        Verlängerungsdauer in Tage : <input type="number" id="verlängernDuration" autocomplete="off"> <br>
+        Verlängerungsdauer in Tagen: <input type="number" id="verlängernDuration" autocomplete="off"> <br>
         <button id="verlängernSubmitBtn" disabled>Bestätigen</button>
         <button id="closeVerlängernBtn">Abbrechen</button>
     </dialog>
@@ -165,7 +166,7 @@
         <label>Bezeichnung:</label><br>
         <input type="text" id="editBezeichnung" autocomplete="off"><br>
         <label>Typ:</label><select id="editTypeSelect"></select><br><br>
-        <label>Status:</label> <select id="editStatusSelect"></select><button id="addStatusBtn" class="btnType"><img src="pics/plus_type.png" alt="X"></button><br>
+        <label>Status:</label> <select id="editStatusSelect"></select><button id="addStatusBtn" class="btnType"><img src="img/plus_type.png" alt="X"></button><br>
         <label>Anschaffungsdatum:</label><br>
         <input type="date" id="editPurchaseDate" autocomplete="off"><br>
         <div style="margin-top:18px;">
@@ -211,14 +212,14 @@
      
      <dialog id="createWorkerDialog">
         <h1>Neuen Mitarbeiter anlegen</h1>
-        <h3>Folgende informationen angeben:</h3>
-        Vorname : <input type="text" id="workerFirstName" placeholder="Vorname" autocomplete="off"> <br>
-        Nachname : <input type="text" id="workerLastName" placeholder="Nachname" autocomplete="off"> <br>
-        Email : <input type="email" id="workerEmail" placeholder="E-Mail" autocomplete="off"> <br>
-        Abteilung : <select id="workerDepartmentSelect" autocomplete="off"></select> <button id="addAbteilungBtn" class="btnType"><img src="pics/plus_type.png" alt="X"></button><br>
+        <h3>Folgende Informationen angeben:</h3>
+        Vorname: <input type="text" id="workerFirstName" placeholder="Vorname" autocomplete="off"> <br>
+        Nachname: <input type="text" id="workerLastName" placeholder="Nachname" autocomplete="off"> <br>
+        E-Mail: <input type="email" id="workerEmail" placeholder="E-Mail" autocomplete="off"> <br>
+        Abteilung: <select id="workerDepartmentSelect" autocomplete="off"></select> <button id="addAbteilungBtn" class="btnType"><img src="img/plus_type.png" alt="X"></button><br>
 
         <button id="createWorkerSubmitBtn">Bestätigen</button>
-        <button class="closeBtn" id="closeBtnWorker"> <img src="pics/close.png" alt="X"></button>
+        <button class="closeBtn" id="closeBtnWorker"> <img src="img/close.png" alt="X"></button>
     </dialog>
 
     <dialog id="editMitarbeiterDialog">
@@ -226,7 +227,7 @@
         <input type="hidden" id="editMitarbeiterId">
         Vorname: <input type="text" id="editWorkerFirstName" autocomplete="off"> <br>
         Nachname: <input type="text" id="editWorkerLastName" autocomplete="off"> <br>
-        Email: <input type="email" id="editWorkerEmail" autocomplete="off"> <br>
+        E-Mail: <input type="email" id="editWorkerEmail" autocomplete="off"> <br>
         Abteilung: <select id="editWorkerDepartmentSelect" autocomplete="off"></select> <br>
         <button id="saveEditMitarbeiterBtn" disabled>Speichern</button>
         <button id="cancelEditMitarbeiterBtn">Abbrechen</button>
@@ -236,7 +237,7 @@
         <h2>Mitarbeiter löschen</h2>
         <p>Prüfe den Mitarbeiter vor dem Löschen:</p>
         <p><strong>Name:</strong> <span id="deleteMitarbeiterName"></span></p>
-        <p><strong>Email:</strong> <span id="deleteMitarbeiterEmail"></span></p>
+        <p><strong>E-Mail:</strong> <span id="deleteMitarbeiterEmail"></span></p>
         <button id="confirmDeleteMitarbeiterBtn">Löschen</button>
         <button id="cancelDeleteMitarbeiterBtn">Abbrechen</button>
     </dialog>
@@ -290,9 +291,7 @@
     </dialog>
 
 
-
-    <script src="scripts/scripts.js"></script>
+    <script type="module" src="js/main.js"></script>
     <div id="toast" class="toast-notification">Erfolgreich!</div>
 </body>
-    
 </html>
