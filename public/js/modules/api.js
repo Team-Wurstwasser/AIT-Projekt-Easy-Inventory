@@ -1,6 +1,4 @@
-import { API_URL } from "./config.js";
-
-const url = (resource, extra = "") => `${API_URL}?resource=${resource}${extra}`;
+const url = (resource, query = "") => `/api/${resource}${query}`;
 
 // Fragt die API an und liefert immer ein Objekt mit success/error zurück.
 export async function api(resource, { method = "GET", body } = {}) {
@@ -23,4 +21,4 @@ export const apiPut = (resource, body) => api(resource, { method: "PUT", body })
 export const apiDelete = (resource, body) => api(resource, { method: "DELETE", body });
 
 // Bild-URL eines Barcodes
-export const barcodeUrl = (code) => url("barcode", `&code=${encodeURIComponent(code)}`);
+export const barcodeUrl = (code) => url("barcode", `?code=${encodeURIComponent(code)}`);
