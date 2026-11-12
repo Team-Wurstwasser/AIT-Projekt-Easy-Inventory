@@ -5,12 +5,6 @@ namespace Backend\Database;
 use Exception;
 use PDO;
 
-/**
- * DatabaseHandler
- *
- * Zentrale Klasse für Datenbankzugriffe: Werkzeuge, Ausleihe, Mitarbeiter und Stammdaten.
- * Die Methoden kapseln SQL-Abfragen und führen Transaktionen dort aus, wo nötig.
- */
 class DatabaseHandler
 {
     private PDO $pdo;
