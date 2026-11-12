@@ -1,6 +1,6 @@
 {
     "name": "team-wurstwasser/ait-projekt-easy-inventory",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Easy Inventory – Die smarte Werkzeugverwaltung​",
     "license": "AGPL-3.0-or-later",
     "require": {
         "php": "^8.5",
