@@ -4,12 +4,6 @@ namespace Backend\Email;
 
 use Exception;
 
-/**
- * ReminderEmail
- *
- * Baut standardisierte Erinnerungs-E-Mails für auslaufende Ausleihen und
- * verwendet EmailService zum Versenden.
- */
 class ReminderEmail
 {
     private $emailService;
@@ -19,22 +13,9 @@ class ReminderEmail
         $this->emailService = new EmailService();
     }
 
-    /**
-     * Sendet eine Erinnerungs-E-Mail mit Titel, Nachricht und Angaben zum Gegenstand.
-     *
-     * @param string $toEmail Empfänger-E-Mail
-     * @param string $toName Empfänger-Name
-     * @param string $reminderTitle Kurzer Titel der Erinnerung
-     * @param string $reminderMessage Nachrichtentext
-     * @param string $gegenstand Beschreibung des zurückzugebenden Gegenstands
-     * @param string $rückgabeTermin Datum der Fälligkeit
-     * @return bool true bei erfolgreichem Versand
-     * @throws Exception wenn das Senden fehlschlägt
-     */
     public function sendEmail($toEmail, $toName, $reminderTitle, $reminderMessage, $gegenstand, $rückgabeTermin)
     {
         try {
-            // Baut Subject und HTML-Body zusammen und nutzt EmailService zum Senden
             $subject = "Erinnerung: " . $reminderTitle;
 
             $body = $this->generateEmailTemplate($toName, $reminderTitle, $reminderMessage, $gegenstand, $rückgabeTermin);
@@ -46,11 +27,6 @@ class ReminderEmail
         }
     }
 
-    /**
-     * Generiert das HTML-Template für die Erinnerungs-E-Mail.
-     *
-     * @return string HTML-String der E-Mail
-     */
     private function generateEmailTemplate($toName, $reminderTitle, $reminderMessage, $gegenstand, $rückgabeTermin)
     {
         $dateRow = '
@@ -59,6 +35,8 @@ class ReminderEmail
                 <strong>Rückgabetermin:</strong> ' . htmlspecialchars($rückgabeTermin) . '
             </td>
         </tr>';
+
+        $appUrl = rtrim($_ENV['APP_URL'] ?? '', '/');
 
         $template = '
 <!DOCTYPE html>
@@ -107,7 +85,7 @@ class ReminderEmail
                             <table border="0" cellspacing="0" cellpadding="0" width="100%">
                                 <tr>
                                     <td align="center">
-                                        <a href="https://mhp.hallo123wert.de/" class="button">Jetzt im Portal bearbeiten</a>
+                                        <a href="' . htmlspecialchars($appUrl, ENT_QUOTES, 'UTF-8') . '/" class="button">Jetzt im Portal bearbeiten</a>
                                     </td>
                                 </tr>
                             </table>
