@@ -1,12 +1,40 @@
 {
+    "name": "team-wurstwasser/ait-projekt-easy-inventory",
+    "description": "The skeleton application for the Laravel framework.",
+    "license": "AGPL-3.0-or-later",
     "require": {
-        "phpmailer/phpmailer": "^7.0",
-        "picqer/php-barcode-generator": "^3.2",
-        "vlucas/phpdotenv": "^5.6"
+        "php": "^8.5",
+        "laravel/framework": "^13.17",
+        "laravel/tinker": "^3.0",
+        "picqer/php-barcode-generator": "^3.3"
+    },
+    "require-dev": {
+        "laravel/pail": "^1.2.5",
+        "laravel/pao": "^1.0.6",
+        "laravel/pint": "^1.27",
+        "nunomaduro/collision": "^8.6"
     },
     "autoload": {
         "psr-4": {
-            "Backend\\": "Backend/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
-    }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-install-cmd": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
