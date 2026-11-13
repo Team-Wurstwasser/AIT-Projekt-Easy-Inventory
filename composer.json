@@ -1,6 +1,6 @@
 {
     "name": "team-wurstwasser/ait-projekt-easy-inventory",
-    "description": "Easy Inventory – Die smarte Werkzeugverwaltung​",
+    "description": "Die smarte Werkzeugverwaltung​",
     "license": "AGPL-3.0-or-later",
     "require": {
         "php": "^8.5",
